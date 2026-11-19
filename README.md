@@ -93,7 +93,7 @@ deadline-manager/
 
 ```bash
 # 1. Clone and enter the project
-git clone <your-repository-url>
+git clone https://github.com/jvargas05/student-assignment-deadline-system
 cd deadline-manager
 
 # 2. Install dependencies for both server and client
