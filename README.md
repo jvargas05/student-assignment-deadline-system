@@ -4,11 +4,9 @@
 
 | | |
 |---|---|
-| **Team** | _Member 1, Member 2, Member 3, (Member 4)_ |
-| **Course / Section** | _DCIT 26 - your section_ |
-| **GitHub repository** | _https://github.com/your-team/deadline-manager_ |
-| **Deployed / demo link** | _https://your-app-link-here (or "local demo - see Installation")_ |
-
+| **Team** | Paloma, Vargas, Figueroa, De Leon, Macaburas_ |
+| **Course / Section** | BSIT 3-5 |
+| **GitHub repository** | _[https://github.com/your-team/deadline-manager](https://github.com/jvargas05/student-assignment-deadline-system)_ |
 > Fill in the italic placeholders above before submitting.
 
 ---
