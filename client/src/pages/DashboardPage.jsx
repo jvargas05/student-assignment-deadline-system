@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAssignments, patchAssignment } from '../api/assignments.js';
+import { getAssignments, patchAssignment, deleteAssignment } from '../api/assignments.js';
 import AssignmentCard from '../components/AssignmentCard.jsx';
 import StatsSummary from '../components/StatsSummary.jsx';
 import Loading from '../components/Loading.jsx';
@@ -49,6 +49,20 @@ export default function DashboardPage() {
     }
   };
 
+  const handleDelete = async (assignment) => {
+    if (!window.confirm(`Delete "${assignment.title}"?`)) return;
+    setBusyId(assignment._id);
+    setActionError('');
+    try {
+      await deleteAssignment(assignment._id);
+      setAssignments((list) => list.filter((a) => a._id !== assignment._id));
+    } catch (err) {
+      setActionError(err.message);
+    } finally {
+      setBusyId(null);
+    }
+  };
+
   if (loading) return <Loading text="Loading your deadlines..." />;
   if (error) return <ErrorMessage message={error} onRetry={() => setReloadKey((k) => k + 1)} />;
 
@@ -62,7 +76,7 @@ export default function DashboardPage() {
     );
   }
 
-  const upcoming = assignments.filter((a) => a.status !== 'Submitted').slice(0, 5);
+  const upcoming = assignments.filter((a) => a.status !== 'Submitted').slice(0, 3);
 
   return (
     <>
@@ -84,6 +98,7 @@ export default function DashboardPage() {
               key={a._id}
               assignment={a}
               onToggleSubmitted={handleToggle}
+              onDelete={handleDelete}
               busy={busyId === a._id}
             />
           ))}
