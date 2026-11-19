@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Team** | Paloma, Vargas, Figueroa, De Leon, Macaburas_ |
+| **Team** | Paloma, Vargas, Figueroa, De Leon, Macaburas |
 | **Course / Section** | BSIT 3-5 |
 | **GitHub repository** | _[https://github.com/your-team/deadline-manager](https://github.com/jvargas05/student-assignment-deadline-system)_ |
 > Fill in the italic placeholders above before submitting.
