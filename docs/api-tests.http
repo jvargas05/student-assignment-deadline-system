@@ -1,0 +1,82 @@
+### DueTrack API requests
+### Works with the VS Code "REST Client" extension (click "Send Request").
+### For Thunder Client / Postman, copy the method, URL and JSON body of each request.
+
+@baseUrl = http://localhost:5000/api
+
+### 1. Health check  -> 200
+GET {{baseUrl}}/health
+
+### 2. Create (valid)  -> 201   (copy the "_id" from the response into @id below)
+POST {{baseUrl}}/assignments
+Content-Type: application/json
+
+{
+  "title": "React Router Activity",
+  "course": "DCIT 26",
+  "dueDate": "2030-01-15T10:00:00.000Z",
+  "priority": "High",
+  "category": "Lab",
+  "description": "Add routes and a dynamic detail page."
+}
+
+### 3. Create (invalid - missing title)  -> 400
+POST {{baseUrl}}/assignments
+Content-Type: application/json
+
+{
+  "course": "DCIT 26",
+  "dueDate": "2030-01-15T10:00:00.000Z"
+}
+
+### 4. Get all  -> 200
+GET {{baseUrl}}/assignments
+
+### 5. Get all, filtered and sorted  -> 200
+GET {{baseUrl}}/assignments?status=Pending&search=react&sort=-dueDate
+
+### 6. Get all, search with no match  -> 200 with []
+GET {{baseUrl}}/assignments?search=zzzzNoMatchzzzz
+
+### Paste a real id here:
+@id = PASTE_ID_HERE
+
+### 7. Get by id  -> 200
+GET {{baseUrl}}/assignments/{{id}}
+
+### 8. Get by id (does not exist)  -> 404
+GET {{baseUrl}}/assignments/000000000000000000000000
+
+### 9. Get by id (malformed id)  -> 400
+GET {{baseUrl}}/assignments/abc123
+
+### 10. Update (PUT)  -> 200
+PUT {{baseUrl}}/assignments/{{id}}
+Content-Type: application/json
+
+{
+  "title": "React Router Activity (edited)",
+  "course": "DCIT 26",
+  "dueDate": "2030-02-01T10:00:00.000Z",
+  "priority": "Medium",
+  "category": "Lab",
+  "status": "In Progress"
+}
+
+### 11. Update (PUT, invalid - empty title)  -> 400
+PUT {{baseUrl}}/assignments/{{id}}
+Content-Type: application/json
+
+{ "title": "" }
+
+### 12. Partial update (PATCH)  -> 200
+PATCH {{baseUrl}}/assignments/{{id}}
+Content-Type: application/json
+
+{ "status": "Submitted" }
+
+### 13. Delete  -> 200
+DELETE {{baseUrl}}/assignments/{{id}}
+
+### 14. Delete again (already gone)  -> 404
+DELETE {{baseUrl}}/assignments/{{id}}
